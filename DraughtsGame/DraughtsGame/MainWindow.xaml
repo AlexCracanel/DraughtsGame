@@ -3,10 +3,50 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:scorePanel="clr-namespace:DraughtsGame.View.ScoreUserControl"
+        xmlns:infoMenu="clr-namespace:DraughtsGame.View.InfoMenuUserControl"
+        xmlns:gameTable="clr-namespace:DraughtsGame.View.GameTableUserControl"
+        xmlns:optionsMenu="clr-namespace:DraughtsGame.View.GameMenuUserControl"
         xmlns:local="clr-namespace:DraughtsGame"
         mc:Ignorable="d"
-        Title="DraughtsGame" Height="350" Width="525">
+        Title="DraughtsGame" Height="500" Width="700">
     <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0.5*"/>
+        </Grid.ColumnDefinitions>
+
+        <gameTable:GameTableUserControl Margin="50,25,25,25"/>
+        
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <scorePanel:ScoreUserControl Height="auto" Width="auto" 
+                                         Margin="5"
+                                         VerticalAlignment="Top"/>
+
+            <scorePanel:ScoreUserControl Height="auto" Width="auto" 
+                                         Margin="5"
+                                         Grid.Row="2"
+                                         VerticalAlignment="Bottom"/>
+
+            <infoMenu:InfoMenuUserControl Height="auto" Width="auto" 
+                                         Margin="5"
+                                         Grid.Row="1"
+                                         VerticalAlignment="Center"/>
+
+        </Grid>
+
+        <optionsMenu:GameMenuUserControl VerticalAlignment="Top" HorizontalAlignment="Left"/>
+
+        <Grid.Background>
+            <ImageBrush ImageSource="Images/GameTableBackground.jpg"/>
+        </Grid.Background>
         
     </Grid>
 </Window>

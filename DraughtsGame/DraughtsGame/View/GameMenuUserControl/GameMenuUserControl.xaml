@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="DraughtsGame.View.GameMenuUserControl.GameMenuUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DraughtsGame.View.GameMenuUserControl"
+             mc:Ignorable="d" 
+             >
+    <Grid Width="auto" Height="auto">
+        <Grid Name="menuGrid"
+              Visibility="Hidden"
+              Height="750" Width="250" Background="#AAECA427">
+            <TextBlock Height="auto" Width="auto"
+                       Margin="10"
+                       Text="Options"
+                       FontSize="20" FontWeight="Bold"  
+                       Foreground="White" FontFamily="Comic Sans MS"
+                       Name="infoMenuTxt"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Top"/>
+        </Grid>
+
+        <Button Height="50" Width="50"
+                HorizontalAlignment="Left" VerticalAlignment="Top"
+                Click="Button_Click"
+                BorderThickness="0"
+                >
+
+            <Button.Background>
+                <ImageBrush ImageSource="Image/Menu-64.png"/>
+            </Button.Background>
+            
+        </Button>
+    </Grid>
+</UserControl>

@@ -55,6 +55,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="View\GameMenuUserControl\GameMenuUserControl.xaml.cs">
+      <DependentUpon>GameMenuUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\GameTableUserControl\GameTableUserControl.xaml.cs">
+      <DependentUpon>GameTableUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\InfoMenuUserControl\InfoMenuUserControl.xaml.cs">
+      <DependentUpon>InfoMenuUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ScoreUserControl\ScoreUserControl.xaml.cs">
+      <DependentUpon>ScoreUserControl.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -67,8 +79,27 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\GameMenuUserControl\GameMenuUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\GameTableUserControl\GameTableUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\InfoMenuUserControl\InfoMenuUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ScoreUserControl\ScoreUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\DomainModel\GameTable.cs" />
+    <Compile Include="Model\DomainModel\GameUtil.cs" />
+    <Compile Include="Model\ServiceLayer\GameServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -94,6 +125,27 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModel\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\GameTableBackground.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\InfoMenuUserControl\Image\menuBackground.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\ScoreUserControl\Images\menuBackground.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\GameTableUserControl\Image\gameTableImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\GameMenuUserControl\Image\Menu-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\GameMenuUserControl\Image\GameTableBackground.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

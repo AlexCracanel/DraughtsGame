@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="DraughtsGame.View.ScoreUserControl.ScoreUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DraughtsGame.View.ScoreUserControl"
+             mc:Ignorable="d" 
+             >
+
+    <Border CornerRadius="30"
+            BorderThickness="6"
+            BorderBrush="#FF4D3202"
+            Height="auto" 
+            Width="auto" 
+            MinHeight="100" MinWidth="150"
+            MaxHeight="125" MaxWidth="200"
+            >
+        <Grid>
+            <TextBlock Height="auto" Width="auto"
+                       HorizontalAlignment="Center"
+                       Margin="10"
+                       Text="Player name"
+                       FontSize="20" FontWeight="Bold"  
+                       Foreground="White" FontFamily="Comic Sans MS"
+                       VerticalAlignment="Top"
+                       Name="playerNameTxt"
+                       />
+
+            <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                       Height="auto" Width="auto"
+                       Text="Score : "
+                       FontSize="15" FontWeight="Bold"  
+                       Foreground="White" FontFamily="Comic Sans MS"
+                       Margin="15"
+                       />
+
+            <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                       Height="auto" Width="auto"
+                       Text="0"
+                       FontSize="15" FontWeight="Bold"  
+                       Foreground="White" FontFamily="Comic Sans MS"
+                       Margin="15"
+                       />
+
+        </Grid>
+
+        <Border.Background>
+            <ImageBrush ImageSource="Images/menuBackground.jpg" />
+        </Border.Background>
+    </Border>
+</UserControl>
