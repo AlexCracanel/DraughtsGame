@@ -20,9 +20,19 @@ namespace DraughtsGame.View.InfoMenuUserControl
     /// </summary>
     public partial class InfoMenuUserControl : UserControl
     {
+        public static readonly DependencyProperty InfoTextProperty =
+       DependencyProperty.Register("PlayerName", typeof(string), typeof(InfoMenuUserControl), new FrameworkPropertyMetadata(string.Empty));
+
+        public string InfoText
+        {
+            get { return (string)GetValue(InfoTextProperty); }
+            set { SetValue(InfoTextProperty, value); }
+        }
+
         public InfoMenuUserControl()
         {
             InitializeComponent();
+            _this.DataContext = this;
         }
     }
 }

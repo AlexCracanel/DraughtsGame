@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DraughtsGame.View.InfoMenuUserControl"
              mc:Ignorable="d" 
+             Name="_this"
              >
 
     <Border BorderThickness="6"
@@ -12,17 +13,18 @@
             Height="auto" 
             Width="auto" 
             MinHeight="100" MinWidth="150"
-            MaxHeight="125" MaxWidth="200"
+            MaxHeight="125" MaxWidth="225"
             >
         <Grid>
             <TextBlock Height="auto" Width="auto"
                        Margin="10"
-                       Text="info menu"
+                       Text="{Binding InfoText}"
                        FontSize="20" FontWeight="Bold"  
                        Foreground="White" FontFamily="Comic Sans MS"
                        Name="infoMenuTxt"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
+                       TextWrapping="Wrap"
                        />
         </Grid>
 

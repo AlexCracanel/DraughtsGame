@@ -30,11 +30,32 @@ namespace DraughtsGame.View.GameTableUserControl
 
             pices = new ObservableCollection<Queen>();
 
-            pices.Add(new Queen(1, 1, 4, @"D:\Repository\DraughtsGame\DraughtsGame\DraughtsGame\Images\blackCheker.png"));
-            pices.Add(new Queen(1, 4, 4, @"D:\Repository\DraughtsGame\DraughtsGame\DraughtsGame\Images\blackCheker.png"));
-            pices.Add(new Queen(1, 6, 2, @"D:\Repository\DraughtsGame\DraughtsGame\DraughtsGame\Images\blackCheker.png"));
+            AddBlackQueen();
+            AddWhiteQueen();
 
             gameTableListBox.ItemsSource = pices;
+        }
+
+        private void AddBlackQueen()
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = ((i + 1) % 2 == 0) ? 0 : 1; j < 8; j += 2)
+                {
+                    pices.Add(new Queen(1, i, j, @"D:\Repository\DraughtsGame\DraughtsGame\DraughtsGame\Images\blackCheker.png"));
+                }
+            }
+        }
+
+        private void AddWhiteQueen()
+        {
+            for (int i = 5; i < 8; i++)
+            {
+                for (int j = ((i + 1) % 2 == 0) ? 0 : 1; j < 8; j += 2)
+                {
+                    pices.Add(new Queen(1, i, j, @"D:\Repository\DraughtsGame\DraughtsGame\DraughtsGame\Images\whiteChecker.png"));
+                }
+            }
         }
     }
 }

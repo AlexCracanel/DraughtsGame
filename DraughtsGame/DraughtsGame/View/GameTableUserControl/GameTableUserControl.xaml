@@ -6,35 +6,36 @@
              xmlns:local="clr-namespace:DraughtsGame.View.GameTableUserControl"
              mc:Ignorable="d" 
              >
+    
     <Border BorderThickness="6"
             BorderBrush="#FF4D3202"
             Height="auto" 
             Width="auto"
             Background="#FFF3DDB4">
-        <ListBox Name="gameTableListBox" BorderThickness="0">
-            <ListBox.ItemsPanel>
+        <ListBox Name="gameTableListBox" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="0">
+        <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Grid Background="Transparent">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
                         </Grid.ColumnDefinitions>
 
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition  Height="*"/>
-                            <RowDefinition  Height="*"/>
-                            <RowDefinition  Height="*"/>
-                            <RowDefinition  Height="*"/>
-                            <RowDefinition  Height="*"/>
-                            <RowDefinition  Height="*"/>
-                            <RowDefinition  Height="*"/>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
                         </Grid.RowDefinitions>
 
                     </Grid>
@@ -51,7 +52,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Background="Transparent">
-                        <Image Source="{Binding ImageSource}"  HorizontalAlignment="Center" Width="40"/>
+                        <Image Source="{Binding ImageSource}"  HorizontalAlignment="Center" Width="45.5"/>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>

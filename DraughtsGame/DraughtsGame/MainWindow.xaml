@@ -9,8 +9,8 @@
         xmlns:optionsMenu="clr-namespace:DraughtsGame.View.GameMenuUserControl"
         xmlns:local="clr-namespace:DraughtsGame"
         mc:Ignorable="d"
-        Title="DraughtsGame" Height="500" Width="700"
-        MinHeight="400" MinWidth="600"
+        Title="DraughtsGame" Height="550" Width="825"
+        MinHeight="550" MinWidth="825"
         Icon="Images/GameIcon.png">
     <Grid>
 
@@ -32,7 +32,7 @@
                                          Margin="5"
                                          VerticalAlignment="Top"
                                          PlayerName="First player"
-                                         Score="10"                             
+                                         Score="0"                             
                                          />
 
             <scorePanel:ScoreUserControl Height="auto" Width="auto" 
@@ -44,6 +44,7 @@
             <infoMenu:InfoMenuUserControl Height="auto" Width="auto" 
                                          Margin="5"
                                          Grid.Row="1"
+                                         InfoText="Please start game !"
                                          VerticalAlignment="Center"/>
 
         </Grid>

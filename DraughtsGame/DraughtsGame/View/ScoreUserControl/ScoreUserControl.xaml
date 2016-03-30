@@ -27,7 +27,7 @@
                        Text="{Binding PlayerName}"
                        />
 
-            <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Center"
+            <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Left"
                        Height="auto" Width="auto"
                        Text="Score : "
                        FontSize="15" FontWeight="Bold"  
@@ -35,19 +35,13 @@
                        Margin="15"
                        />
 
-            <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Right"
+            <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Center"
                        Height="auto" Width="auto"
                        Text="{Binding Score}"
                        FontSize="15" FontWeight="Bold"  
                        Foreground="White" FontFamily="Comic Sans MS"
                        Margin="15"
                        />
-
-            <Image     VerticalAlignment="Bottom" HorizontalAlignment="Left"
-                       Height="30" Width="30"
-                       Margin="10"                  
-                       >
-            </Image>
 
         </Grid>
 

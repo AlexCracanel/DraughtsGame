@@ -42,8 +42,6 @@ namespace DraughtsGame.View.ScoreUserControl
             set { SetValue(PlayerNameProperty, value); }
         }
 
-       
-
         public ScoreUserControl()
         {
             InitializeComponent();
