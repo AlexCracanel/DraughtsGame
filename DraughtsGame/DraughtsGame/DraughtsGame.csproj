@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\DomainModel\Queen.cs" />
     <Compile Include="View\GameMenuUserControl\GameMenuUserControl.xaml.cs">
       <DependentUpon>GameMenuUserControl.xaml</DependentUpon>
     </Compile>
@@ -146,6 +147,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="View\GameMenuUserControl\Image\GameTableBackground.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\GameIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\blackCheker.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\whiteChecker.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

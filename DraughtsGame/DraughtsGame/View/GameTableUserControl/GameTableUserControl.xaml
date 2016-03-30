@@ -11,35 +11,50 @@
             Height="auto" 
             Width="auto"
             Background="#FFF3DDB4">
-        <ListBox>
+        <ListBox Name="gameTableListBox" BorderThickness="0">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Grid Background="Transparent">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
                         <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition  Height="*"/>
+                            <RowDefinition  Height="*"/>
+                            <RowDefinition  Height="*"/>
+                            <RowDefinition  Height="*"/>
+                            <RowDefinition  Height="*"/>
+                            <RowDefinition  Height="*"/>
+                            <RowDefinition  Height="*"/>
                         </Grid.RowDefinitions>
 
                     </Grid>
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
+
+            <ListBox.ItemContainerStyle>
+                <Style>
+                    <Setter Property="Grid.Row" Value="{Binding Row}"/>
+                    <Setter Property="Grid.Column" Value="{Binding Column}"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
+
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Background="Transparent">
+                        <Image Source="{Binding ImageSource}"  HorizontalAlignment="Center" Width="40"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
 
             <ListBox.Background>
                 <ImageBrush ImageSource="Image/gameTableImage.png"/>

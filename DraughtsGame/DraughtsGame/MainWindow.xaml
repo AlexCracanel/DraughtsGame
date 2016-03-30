@@ -9,7 +9,9 @@
         xmlns:optionsMenu="clr-namespace:DraughtsGame.View.GameMenuUserControl"
         xmlns:local="clr-namespace:DraughtsGame"
         mc:Ignorable="d"
-        Title="DraughtsGame" Height="500" Width="700">
+        Title="DraughtsGame" Height="500" Width="700"
+        MinHeight="400" MinWidth="600"
+        Icon="Images/GameIcon.png">
     <Grid>
 
         <Grid.ColumnDefinitions>
@@ -28,11 +30,15 @@
 
             <scorePanel:ScoreUserControl Height="auto" Width="auto" 
                                          Margin="5"
-                                         VerticalAlignment="Top"/>
+                                         VerticalAlignment="Top"
+                                         PlayerName="First player"
+                                         Score="10"                             
+                                         />
 
             <scorePanel:ScoreUserControl Height="auto" Width="auto" 
                                          Margin="5"
                                          Grid.Row="2"
+                                         PlayerName="Second player"
                                          VerticalAlignment="Bottom"/>
 
             <infoMenu:InfoMenuUserControl Height="auto" Width="auto" 

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using DraughtsGame.Model.DomainModel;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,12 +22,19 @@ namespace DraughtsGame.View.GameTableUserControl
     /// </summary>
     public partial class GameTableUserControl : UserControl
     {
+        ObservableCollection<Queen> pices;
+
         public GameTableUserControl()
         {
             InitializeComponent();
-            
 
-            
+            pices = new ObservableCollection<Queen>();
+
+            pices.Add(new Queen(1, 1, 4, @"D:\Repository\DraughtsGame\DraughtsGame\DraughtsGame\Images\blackCheker.png"));
+            pices.Add(new Queen(1, 4, 4, @"D:\Repository\DraughtsGame\DraughtsGame\DraughtsGame\Images\blackCheker.png"));
+            pices.Add(new Queen(1, 6, 2, @"D:\Repository\DraughtsGame\DraughtsGame\DraughtsGame\Images\blackCheker.png"));
+
+            gameTableListBox.ItemsSource = pices;
         }
     }
 }
