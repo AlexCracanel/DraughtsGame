@@ -42,7 +42,7 @@ namespace DraughtsGame.View.GameTableUserControl
             {
                 for (int j = ((i + 1) % 2 == 0) ? 0 : 1; j < 8; j += 2)
                 {
-                    pices.Add(new Queen(1, i, j, @"D:\Repository\DraughtsGame\DraughtsGame\DraughtsGame\Images\blackCheker.png"));
+                    pices.Add(new Queen(1, i, j, @"\Images\blackCheker.png"));
                 }
             }
         }
@@ -53,7 +53,7 @@ namespace DraughtsGame.View.GameTableUserControl
             {
                 for (int j = ((i + 1) % 2 == 0) ? 0 : 1; j < 8; j += 2)
                 {
-                    pices.Add(new Queen(1, i, j, @"D:\Repository\DraughtsGame\DraughtsGame\DraughtsGame\Images\whiteChecker.png"));
+                    pices.Add(new Queen(1, i, j, @"\Images\whiteChecker.png"));
                 }
             }
         }
