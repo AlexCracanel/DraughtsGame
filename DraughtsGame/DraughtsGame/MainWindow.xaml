@@ -13,7 +13,6 @@
         MinHeight="550" MinWidth="825"
         Icon="Images/GameIcon.png">
     <Grid>
-
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="0.5*"/>

@@ -8,8 +8,9 @@ using System.Windows.Media.Imaging;
 
 namespace DraughtsGame.Model.DomainModel
 {
-    class Queen : DependencyObject
+    class Piece : DependencyObject
     {
+
         public int Row
         {
             get { return (int)GetValue(RowProperty); }
@@ -17,7 +18,7 @@ namespace DraughtsGame.Model.DomainModel
         }
 
         public static readonly DependencyProperty RowProperty =
-            DependencyProperty.Register("Row", typeof(int), typeof(Queen), new PropertyMetadata(0));
+            DependencyProperty.Register("Row", typeof(int), typeof(Piece), new PropertyMetadata(0));
 
         public int Column
         {
@@ -27,7 +28,7 @@ namespace DraughtsGame.Model.DomainModel
 
         // Using a DependencyProperty as the backing store for Column.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ColumnProperty =
-            DependencyProperty.Register("Column", typeof(int), typeof(Queen), new PropertyMetadata(0));
+            DependencyProperty.Register("Column", typeof(int), typeof(Piece), new PropertyMetadata(0));
 
         public BitmapImage ImageSource
         {
@@ -37,7 +38,7 @@ namespace DraughtsGame.Model.DomainModel
 
         // Using a DependencyProperty as the backing store for ImageSource.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ImageSourceProperty =
-            DependencyProperty.Register("ImageSource", typeof(BitmapImage), typeof(Queen), new PropertyMetadata(new BitmapImage()));
+            DependencyProperty.Register("ImageSource", typeof(BitmapImage), typeof(Piece), new PropertyMetadata(new BitmapImage()));
 
         public int Type
         {
@@ -47,10 +48,10 @@ namespace DraughtsGame.Model.DomainModel
 
         // Using a DependencyProperty as the backing store for Type.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TypeProperty =
-            DependencyProperty.Register("Type", typeof(int), typeof(Queen), new PropertyMetadata(0));
+            DependencyProperty.Register("Type", typeof(int), typeof(Piece), new PropertyMetadata(0));
 
 
-        public Queen(int type,int row,int column,string source)
+        public Piece(int type,int row,int column,string source)
         {
             this.Type = type;
             this.Row = row;
@@ -61,6 +62,13 @@ namespace DraughtsGame.Model.DomainModel
             ImageSource.BeginInit();
             ImageSource.UriSource = new Uri(source, UriKind.RelativeOrAbsolute);
             ImageSource.EndInit();
+        }
+
+        public Piece(int type, int row, int column)
+        {
+            this.Type = type;
+            this.Row = row;
+            this.Column = column;
         }
 
     }

@@ -38,6 +38,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -56,13 +58,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\DomainModel\Queen.cs" />
+    <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="Model\DomainModel\BasePropertyChange.cs" />
+    <Compile Include="Model\DomainModel\Piece.cs" />
     <Compile Include="View\GameMenuUserControl\GameMenuUserControl.xaml.cs">
       <DependentUpon>GameMenuUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\GameTableUserControl\GameTableUserControl.xaml.cs">
       <DependentUpon>GameTableUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\GameTableUserControl\ViewModel\GameTableViewModel.cs" />
     <Compile Include="View\InfoMenuUserControl\InfoMenuUserControl.xaml.cs">
       <DependentUpon>InfoMenuUserControl.xaml</DependentUpon>
     </Compile>

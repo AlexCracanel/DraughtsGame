@@ -4,16 +4,28 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DraughtsGame.View.GameTableUserControl"
+             xmlns:Triggers="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              mc:Ignorable="d" 
+             Name="window"
              >
-    
     <Border BorderThickness="6"
             BorderBrush="#FF4D3202"
             Height="auto" 
             Width="auto"
             Background="#FFF3DDB4">
-        <ListBox Name="gameTableListBox" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="0">
-        <ListBox.ItemsPanel>
+        <ListBox Name="gameTableListBox"
+                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+                 BorderThickness="0"
+                 ItemsSource="{Binding Pices}"         
+                 >
+    
+            <Triggers:Interaction.Triggers>
+                <Triggers:EventTrigger EventName="SelectionChanged">
+                    <Triggers:InvokeCommandAction Command="{Binding MoveGameCommand}" CommandParameter="{Binding SelectedItem, ElementName=gameTableListBox}"/>
+                </Triggers:EventTrigger>
+            </Triggers:Interaction.Triggers>
+
+            <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Grid Background="Transparent">
                         <Grid.ColumnDefinitions>
@@ -46,21 +58,38 @@
                 <Style>
                     <Setter Property="Grid.Row" Value="{Binding Row}"/>
                     <Setter Property="Grid.Column" Value="{Binding Column}"/>
+                    <!--<Style.Triggers>
+                        <EventTrigger RoutedEvent="UIElement.MouseLeftButtonDown">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1" To="0.75" Duration="0:0:0.5" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>              
+                    </Style.Triggers>-->
                 </Style>
+
             </ListBox.ItemContainerStyle>
 
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Background="Transparent">
-                        <Image Source="{Binding ImageSource}"  HorizontalAlignment="Center" Width="45.5"/>
+                        <Image Source="{Binding ImageSource}"  HorizontalAlignment="Center" Width="45.5" >
+                            <!--<Image.InputBindings>
+                                <MouseBinding MouseAction="LeftClick"
+                                              Command="{Binding DataContext.MoveGameCommand,RelativeSource={RelativeSource FindAncestor,ListView,1}}" 
+                                              CommandParameter="{Binding ElementName=gameTableListBox,Path=SelectedItem}"/>
+                            </Image.InputBindings>-->
+                        </Image>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
 
-            <ListBox.Background>
+            <ListBox.Background >
                 <ImageBrush ImageSource="Image/gameTableImage.png"/>
             </ListBox.Background>
-
         </ListBox>
     </Border>
 

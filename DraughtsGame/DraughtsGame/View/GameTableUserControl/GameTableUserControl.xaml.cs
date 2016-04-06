@@ -1,4 +1,5 @@
 ﻿using DraughtsGame.Model.DomainModel;
+using DraughtsGame.View.GameTableUserControl.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,40 +23,11 @@ namespace DraughtsGame.View.GameTableUserControl
     /// </summary>
     public partial class GameTableUserControl : UserControl
     {
-        ObservableCollection<Queen> pices;
 
         public GameTableUserControl()
         {
             InitializeComponent();
-
-            pices = new ObservableCollection<Queen>();
-
-            AddBlackQueen();
-            AddWhiteQueen();
-
-            gameTableListBox.ItemsSource = pices;
-        }
-
-        private void AddBlackQueen()
-        {
-            for (int i = 0; i < 3; i++)
-            {
-                for (int j = ((i + 1) % 2 == 0) ? 0 : 1; j < 8; j += 2)
-                {
-                    pices.Add(new Queen(1, i, j, @"\Images\blackCheker.png"));
-                }
-            }
-        }
-
-        private void AddWhiteQueen()
-        {
-            for (int i = 5; i < 8; i++)
-            {
-                for (int j = ((i + 1) % 2 == 0) ? 0 : 1; j < 8; j += 2)
-                {
-                    pices.Add(new Queen(1, i, j, @"\Images\whiteChecker.png"));
-                }
-            }
+            DataContext = new GameTableViewModel();
         }
     }
 }
