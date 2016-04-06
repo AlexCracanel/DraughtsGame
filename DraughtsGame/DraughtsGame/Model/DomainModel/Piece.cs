@@ -40,18 +40,18 @@ namespace DraughtsGame.Model.DomainModel
         public static readonly DependencyProperty ImageSourceProperty =
             DependencyProperty.Register("ImageSource", typeof(BitmapImage), typeof(Piece), new PropertyMetadata(new BitmapImage()));
 
-        public int Type
+        public GameUtil.PieceType Type
         {
-            get { return (int)GetValue(TypeProperty); }
+            get { return (GameUtil.PieceType)GetValue(TypeProperty); }
             set { SetValue(TypeProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for Type.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TypeProperty =
-            DependencyProperty.Register("Type", typeof(int), typeof(Piece), new PropertyMetadata(0));
+            DependencyProperty.Register("Type", typeof(GameUtil.PieceType), typeof(Piece), new PropertyMetadata(GameUtil.PieceType.EMPTY));
 
 
-        public Piece(int type,int row,int column,string source)
+        public Piece(GameUtil.PieceType type,int row,int column,string source)
         {
             this.Type = type;
             this.Row = row;
@@ -64,7 +64,7 @@ namespace DraughtsGame.Model.DomainModel
             ImageSource.EndInit();
         }
 
-        public Piece(int type, int row, int column)
+        public Piece(GameUtil.PieceType type, int row, int column)
         {
             this.Type = type;
             this.Row = row;

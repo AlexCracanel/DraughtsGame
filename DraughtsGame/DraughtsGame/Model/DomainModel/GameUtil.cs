@@ -8,25 +8,19 @@ namespace DraughtsGame.Model.DomainModel
 {
     public class GameUtil
     {
-        public enum CellState
-        {
-            UNITIALIZED,
-            RED,
-            BLACK,
-            RED_KING,
-            BLACK_KING
-        }
 
-        public enum GameState
+        public enum PieceType
         {
-            UNITIALIZED,
-            IN_GAME,
-            FINISHED
+            EMPTY,
+            WHITE_QUEEN,
+            BLACK_QUEEN,
+            WHITE_KING,
+            BLACK_KING 
         }
 
         public enum CurrentPlayer
         {
-            RED_PLAYER,
+            WHITE_PLAYER,
             BLACK_PLAYER
         }
     }

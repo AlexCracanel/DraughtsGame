@@ -61,6 +61,7 @@
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Model\DomainModel\BasePropertyChange.cs" />
     <Compile Include="Model\DomainModel\Piece.cs" />
+    <Compile Include="Model\ServiceLayer\GameActions.cs" />
     <Compile Include="View\GameMenuUserControl\GameMenuUserControl.xaml.cs">
       <DependentUpon>GameMenuUserControl.xaml</DependentUpon>
     </Compile>
@@ -104,9 +105,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\DomainModel\GameTable.cs" />
     <Compile Include="Model\DomainModel\GameUtil.cs" />
-    <Compile Include="Model\ServiceLayer\GameServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
