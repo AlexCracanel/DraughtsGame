@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DraughtsGame.Commands;
 using DraughtsGame.Model.DomainModel;
 using System.Collections.ObjectModel;
+using System.Windows.Media.Imaging;
 
 namespace DraughtsGame.Model.ServiceLayer
 {
@@ -80,12 +81,10 @@ namespace DraughtsGame.Model.ServiceLayer
                     switch (selectedPiece.Type)
                     {
                         case GameUtil.PieceType.BLACK_QUEEN:
+
                             if (currentPlayer == GameUtil.CurrentPlayer.BLACK_PLAYER)
                             {
-                                if (MoveForBlackQueen(piece))
-                                {
-                                    currentPlayer = GameUtil.CurrentPlayer.WHITE_PLAYER;
-                                }
+                                MoveForBlackQueen(piece);
                             }
                             break;
 
@@ -93,65 +92,55 @@ namespace DraughtsGame.Model.ServiceLayer
 
                             if (currentPlayer == GameUtil.CurrentPlayer.WHITE_PLAYER)
                             {
-                                if (MoveForWhiteQueen(piece))
+                                if (currentPlayer == GameUtil.CurrentPlayer.WHITE_PLAYER)
                                 {
-                                    currentPlayer = GameUtil.CurrentPlayer.BLACK_PLAYER;
+                                    MoveForWhiteQueen(piece);
                                 }
                             }
                             break;
 
                         default: break;
                     }
+
+                    TransformKings();
                 }
             }
         }
 
-        private bool MoveForBlackQueen(Piece futurePositon)
+        #region BlackQueen
+
+        private void MoveForBlackQueen(Piece futurePositon)
         {
-            if (WhitePieceNeighbor() == null)
+            if (!BlackShoodTake())
             {
                 if (IsValidBlackMove(futurePositon))
                 {
                     selectedPiece.Column = futurePositon.Column;
                     selectedPiece.Row = futurePositon.Row;
 
-                    return true;
+                    currentPlayer = GameUtil.CurrentPlayer.WHITE_PLAYER;
+
+                    return;
                 }
             }
             else
             {
-                if (IsValidBlackTake(futurePositon))
+                if (BlackCanTake(futurePositon) != null)
                 {
-                    Piece winPiece = WhitePieceNeighbor();
+                    Piece winPiece = BlackCanTake(futurePositon);
                     Pices.Remove(winPiece);
                     selectedPiece.Column = futurePositon.Column;
                     selectedPiece.Row = futurePositon.Row;
 
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        private Piece WhitePieceNeighbor()
-        {
-            foreach (var piece in Pices)
-            {
-                if (piece.Column == (selectedPiece.Column + 1) || piece.Column == (selectedPiece.Column - 1))
-                {
-                    if (piece.Row == (selectedPiece.Row + 1))
+                    if (!BlackShoodTake())
                     {
-                        if (piece.Type == GameUtil.PieceType.WHITE_QUEEN)
-                        {
-                            return piece;
-                        }
+                        currentPlayer = GameUtil.CurrentPlayer.WHITE_PLAYER;
                     }
                 }
             }
 
-            return null;
         }
+
 
         private bool IsValidBlackMove(Piece futurePositon)
         {
@@ -167,65 +156,122 @@ namespace DraughtsGame.Model.ServiceLayer
             return true;
         }
 
-        private bool IsValidBlackTake(Piece futurePositon)
+        private Piece BlackCanTake(Piece futurePosition)
         {
-            if (futurePositon.Column != (selectedPiece.Column + 2) && futurePositon.Column != (selectedPiece.Column - 2))
+            if (futurePosition.Row == selectedPiece.Row + 2)
             {
-                return false;
-            }
-            else if (futurePositon.Row != (selectedPiece.Row + 2))
-            {
-                return false;
+                if ((futurePosition.Column == selectedPiece.Column - 2) || (futurePosition.Column == selectedPiece.Column + 2))
+                {
+                    foreach (Piece piece in Pices)
+                    {
+                        if (piece.Column == (selectedPiece.Column + 1) || piece.Column == (selectedPiece.Column - 1))
+                        {
+                            if (piece.Row == (selectedPiece.Row + 1))
+                            {
+                                if (piece.Type == GameUtil.PieceType.WHITE_QUEEN)
+                                {
+                                    if (piece.Column + 1 == futurePosition.Column || piece.Column - 1 == futurePosition.Column)
+                                    {
+                                        return piece;
+                                    }
+                                }
+                            }
+
+                        }
+                    }
+                }
+
             }
 
-            return true;
+            return null;
         }
 
-        private bool MoveForWhiteQueen(Piece futurePositon)
+        private bool BlackShoodTake()
         {
-            if (BlackPieceNeighbor() == null)
+            for (int i = 0; i < Pices.Count; i++)
             {
-                if (IsValidWhiteMove(futurePositon))
-                {
-                    selectedPiece.Column = futurePositon.Column;
-                    selectedPiece.Row = futurePositon.Row;
+                Piece currentPiece = Pices.ElementAt(i);
 
-                    return true;
-                }
-            }
-            else
-            {
-                if (IsValidWhiteTake(futurePositon))
+                if (currentPiece.Type == GameUtil.PieceType.BLACK_QUEEN)
                 {
-                    Piece winPiece = BlackPieceNeighbor();
-                    Pices.Remove(winPiece);
-                    selectedPiece.Column = futurePositon.Column;
-                    selectedPiece.Row = futurePositon.Row;
+                    for (int j = 0; j < Pices.Count; j++)
+                    {
+                        Piece pieceToVerify = Pices.ElementAt(j);
+                        int sign = 0;
 
-                    return true;
+                        if (pieceToVerify.Type == GameUtil.PieceType.WHITE_QUEEN)
+                        {
+                            if (pieceToVerify.Row == currentPiece.Row + 1)
+                            {
+                                if (pieceToVerify.Column == currentPiece.Column + 1)
+                                {
+                                    sign = 1;
+                                }
+                                else if (pieceToVerify.Column == currentPiece.Column - 1)
+                                {
+                                    sign = -1;
+                                }
+
+                                if (sign != 0)
+                                {
+                                    for (int k = 0; k < Pices.Count; k++)
+                                    {
+                                        Piece secondPieceToVerify = Pices.ElementAt(k);
+                                        if (secondPieceToVerify.Type == GameUtil.PieceType.EMPTY)
+                                        {
+                                            if (secondPieceToVerify.Row == currentPiece.Row + 2)
+                                            {
+                                                if (pieceToVerify.Column + sign == secondPieceToVerify.Column)
+                                                {
+                                                    if (!FoundPieceAtPosition(secondPieceToVerify.Row, secondPieceToVerify.Column))
+                                                    {
+                                                        return true;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
 
             return false;
         }
 
-        private Piece BlackPieceNeighbor()
+        #endregion
+
+        private void MoveForWhiteQueen(Piece futurePositon)
         {
-            foreach (var piece in Pices)
+            if (!WhiteShoodTake())
             {
-                if (piece.Column == (selectedPiece.Column + 1) || piece.Column == (selectedPiece.Column - 1))
+                if (IsValidWhiteMove(futurePositon))
                 {
-                    if (piece.Row == (selectedPiece.Row - 1))
+                    selectedPiece.Column = futurePositon.Column;
+                    selectedPiece.Row = futurePositon.Row;
+
+                    currentPlayer = GameUtil.CurrentPlayer.BLACK_PLAYER;
+
+                    return;
+                }
+            }
+            else
+            {
+                if (WhiteCanTake(futurePositon) != null)
+                {
+                    Piece winPiece = WhiteCanTake(futurePositon);
+                    Pices.Remove(winPiece);
+                    selectedPiece.Column = futurePositon.Column;
+                    selectedPiece.Row = futurePositon.Row;
+
+                    if (!WhiteShoodTake())
                     {
-                        if (piece.Type == GameUtil.PieceType.BLACK_QUEEN)
-                        {
-                            return piece;
-                        }
+                        currentPlayer = GameUtil.CurrentPlayer.BLACK_PLAYER;
                     }
                 }
             }
-
-            return null;
         }
 
         private bool IsValidWhiteMove(Piece futurePositon)
@@ -242,18 +288,139 @@ namespace DraughtsGame.Model.ServiceLayer
             return true;
         }
 
-        private bool IsValidWhiteTake(Piece futurePositon)
+        private Piece WhiteCanTake(Piece futurePosition)
         {
-            if (futurePositon.Column != (selectedPiece.Column + 2) && futurePositon.Column != (selectedPiece.Column - 2))
+            if (futurePosition.Row == selectedPiece.Row - 2)
             {
-                return false;
-            }
-            else if (futurePositon.Row != (selectedPiece.Row - 2))
-            {
-                return false;
+                if ((futurePosition.Column == selectedPiece.Column - 2) || (futurePosition.Column == selectedPiece.Column + 2))
+                {
+                    foreach (Piece piece in Pices)
+                    {
+                        if (piece.Column == (selectedPiece.Column + 1) || piece.Column == (selectedPiece.Column - 1))
+                        {
+                            if (piece.Row == (selectedPiece.Row - 1))
+                            {
+                                if (piece.Type == GameUtil.PieceType.BLACK_QUEEN)
+                                {
+                                    if (piece.Column + 1 == futurePosition.Column || piece.Column - 1 == futurePosition.Column)
+                                    {
+                                        return piece;
+                                    }
+                                }
+                            }
+
+                        }
+                    }
+                }
+
             }
 
-            return true;
+            return null;
+        }
+
+        private bool WhiteShoodTake()
+        {
+            for (int i = 0; i < Pices.Count; i++)
+            {
+                Piece currentPiece = Pices.ElementAt(i);
+
+                if (currentPiece.Type == GameUtil.PieceType.WHITE_QUEEN)
+                {
+                    for (int j = 0; j < Pices.Count; j++)
+                    {
+                        Piece pieceToVerify = Pices.ElementAt(j);
+                        int sign = 0;
+
+                        if (pieceToVerify.Type == GameUtil.PieceType.BLACK_QUEEN)
+                        {
+                            if (pieceToVerify.Row == currentPiece.Row - 1)
+                            {
+                                if (pieceToVerify.Column == currentPiece.Column + 1)
+                                {
+                                    sign = 1;
+                                }
+                                else if (pieceToVerify.Column == currentPiece.Column - 1)
+                                {
+                                    sign = -1;
+                                }
+
+                                if (sign != 0)
+                                {
+                                    for (int k = 0; k < Pices.Count; k++)
+                                    {
+                                        Piece secondPieceToVerify = Pices.ElementAt(k);
+                                        if (secondPieceToVerify.Type == GameUtil.PieceType.EMPTY)
+                                        {
+                                            if (secondPieceToVerify.Row == currentPiece.Row - 2)
+                                            {
+                                                if (pieceToVerify.Column + sign == secondPieceToVerify.Column)
+                                                {
+                                                    if (!FoundPieceAtPosition(secondPieceToVerify.Row, secondPieceToVerify.Column))
+                                                    {
+                                                        return true;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return false;
+        }
+
+
+        private bool FoundPieceAtPosition(int row, int column)
+        {
+            foreach (Piece piece in Pices)
+            {
+                if (piece.Column == column && piece.Row == row && piece.Type != GameUtil.PieceType.EMPTY)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private void TransformKings()
+        {
+            foreach(Piece piece in Pices)
+            {
+                int rowForBlack = 7;
+                int rowForWhite = 0;
+                if(piece.Type == GameUtil.PieceType.BLACK_QUEEN)
+                {
+                    if(piece.Row == rowForBlack)
+                    {
+                        piece.ImageSource = ConvertImage(@"\Images\black_queen.png");
+                        piece.Type = GameUtil.PieceType.BLACK_KING;
+                    }
+                }
+                else if (piece.Type == GameUtil.PieceType.WHITE_QUEEN)
+                {
+                    if (piece.Row == rowForWhite)
+                    {
+                        piece.ImageSource = ConvertImage(@"\Images\white_queen.png");
+                        piece.Type = GameUtil.PieceType.WHITE_KING;
+                    }
+                }
+            }
+        }
+
+        private BitmapImage ConvertImage(string source)
+        {
+            BitmapImage ImageSource = new BitmapImage();
+
+            ImageSource.BeginInit();
+            ImageSource.UriSource = new Uri(source, UriKind.RelativeOrAbsolute);
+            ImageSource.EndInit();
+
+            return ImageSource;
         }
     }
 }
