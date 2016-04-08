@@ -46,7 +46,8 @@
                                          Margin="5"
                                          Grid.Row="1"
                                          InfoText="{Binding ElementName=window,Path=DataContext.InfoMenuText}"
-                                         VerticalAlignment="Center"/>
+                                         VerticalAlignment="Center"
+                                         />
 
         </Grid>
 

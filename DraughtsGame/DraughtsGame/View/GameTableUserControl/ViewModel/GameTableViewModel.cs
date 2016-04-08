@@ -15,10 +15,7 @@ namespace DraughtsGame.View.GameTableUserControl.ViewModel
     class GameTableViewModel : GameActions
     {
 
-        public GameTableViewModel()
-        {
-                 
-        }
+        public GameTableViewModel() {}
 
         private ICommand moveGameCommand;
         public ICommand MoveGameCommand
@@ -34,16 +31,29 @@ namespace DraughtsGame.View.GameTableUserControl.ViewModel
             }
         }
 
-        private ICommand restartGameCommand;
-        public ICommand RestartGameCommand 
+        private ICommand saveGameCommand;
+        public ICommand SaveGameCommand
         {
             get
             {
-                if (restartGameCommand == null)
+                if (saveGameCommand == null)
                 {
-                    //restartGameCommand = new RelayCommand(new Action<object>());
+                    saveGameCommand = new RelayCommand(new Action<object>(SaveGame));
                 }
-                return restartGameCommand;
+                return saveGameCommand;
+            }
+        }
+
+        private ICommand loadGameCommand;
+        public ICommand LoadGameCommand
+        {
+            get
+            {
+                if (loadGameCommand == null)
+                {
+                    loadGameCommand = new RelayCommand(new Action<object>(LoadGame)); 
+                }
+                return loadGameCommand;
             }
         }
     }

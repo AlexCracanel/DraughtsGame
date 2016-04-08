@@ -1,4 +1,6 @@
-﻿using DraughtsGame.View.GameTableUserControl.ViewModel;
+﻿using DraughtsGame.BinarySerializer;
+using DraughtsGame.Model.DomainModel;
+using DraughtsGame.View.GameTableUserControl.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;

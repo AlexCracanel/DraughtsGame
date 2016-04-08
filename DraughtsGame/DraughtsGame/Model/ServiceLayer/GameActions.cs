@@ -8,6 +8,11 @@ using DraughtsGame.Model.DomainModel;
 using System.Collections.ObjectModel;
 using System.Windows.Media.Imaging;
 using System.Windows;
+using System.Windows.Documents;
+using DraughtsGame.View.GameTableUserControl.ViewModel;
+using DraughtsGame.BinarySerializer;
+using Microsoft.Win32;
+using System.Windows.Data;
 
 namespace DraughtsGame.Model.ServiceLayer
 {
@@ -76,15 +81,22 @@ namespace DraughtsGame.Model.ServiceLayer
         public static readonly DependencyProperty InfoTextProperty =
             DependencyProperty.Register("InfoMenuText", typeof(string), typeof(GameActions), new PropertyMetadata(String.Empty));
 
+
+
         public ObservableCollection<Piece> Pieces
         {
-            get;
-            set;
+            get { return (ObservableCollection<Piece>)GetValue(PiecesProperty); }
+            set { SetValue(PiecesProperty, value); }
         }
+
+        // Using a DependencyProperty as the backing store for Pieces.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty PiecesProperty =
+            DependencyProperty.Register("Pieces", typeof(ObservableCollection<Piece>), typeof(GameActions), new PropertyMetadata(new ObservableCollection<Piece>()));
+
 
         private Piece selectedPiece;
 
-        private GameUtil.CurrentPlayer currentPlayer;
+        public GameUtil.CurrentPlayer currentPlayer;
 
         public GameActions()
         {
@@ -141,6 +153,11 @@ namespace DraughtsGame.Model.ServiceLayer
             }
 
             var piece = parameter as Piece;
+
+            if(piece == null)
+            {
+                return;
+            }
 
             if (piece != null && piece.Type != GameUtil.PieceType.EMPTY)
             {
@@ -899,6 +916,86 @@ namespace DraughtsGame.Model.ServiceLayer
             ImageSource.EndInit();
 
             return ImageSource;
+        }
+
+        public void SaveGame(object parameter)
+        {
+            GameTableViewModel gameTableViewModel  = parameter as GameTableViewModel;
+
+            ObjectToSerialize obj = new ObjectToSerialize();
+
+            obj.BlackScore = gameTableViewModel.BlackScore;
+            obj.Pieces = gameTableViewModel.Pieces;
+            obj.WhiteScore = gameTableViewModel.WhiteScore;
+            obj.CurrentPlayer = gameTableViewModel.currentPlayer;
+            obj.InfoMenuText = gameTableViewModel.InfoMenuText;
+
+            Serializer serializer = new Serializer();
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Text Files (.txt)|*.txt|All Files (*.*)|*.*";
+            saveFileDialog.Title = "Save game";
+            saveFileDialog.ShowDialog();
+
+            // If the file name is not an empty string open it for saving.
+            if (saveFileDialog.FileName != "")
+            {
+                serializer.SerializeObject(@saveFileDialog.FileName, obj);
+            }
+        }
+
+        public void LoadGame(object parameter)
+        {
+            GameTableViewModel gameTableViewModel = parameter as GameTableViewModel;
+
+            ObjectToSerialize obj = new ObjectToSerialize();
+            Serializer serializer = new Serializer();
+
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+
+            openFileDialog.Filter = "Text Files (.txt)|*.txt|All Files (*.*)|*.*";
+            openFileDialog.FilterIndex = 1;
+
+            openFileDialog.Multiselect = true;
+
+            bool? userClickedOK = openFileDialog.ShowDialog();
+
+            if (userClickedOK == true)
+            {
+                obj = serializer.DeserializeObject(@openFileDialog.FileName);
+
+                gameTableViewModel.Pieces = obj.Pieces;
+                gameTableViewModel.BlackScore = obj.BlackScore;
+                gameTableViewModel.WhiteScore = obj.WhiteScore;
+                gameTableViewModel.InfoMenuText = obj.InfoMenuText;
+                gameTableViewModel.currentPlayer = obj.CurrentPlayer;
+
+                RedrawPieceImages();
+            }
+        }
+
+        private void RedrawPieceImages()
+        {
+            foreach(Piece piece in Pieces)
+            {
+                if(piece.Type == GameUtil.PieceType.WHITE_QUEEN)
+                {
+                    piece.ImageSource = ConvertImage(@"\Images\whiteChecker.png");
+                }
+                else if (piece.Type == GameUtil.PieceType.BLACK_QUEEN)
+                {
+                    piece.ImageSource = ConvertImage(@"\Images\blackCheker.png");
+                }
+                else if (piece.Type == GameUtil.PieceType.BLACK_KING)
+                {
+                    piece.ImageSource = ConvertImage(@"\Images\black_queen.png");
+                }
+                else if (piece.Type == GameUtil.PieceType.WHITE_KING)
+                {
+                    piece.ImageSource = ConvertImage(@"\Images\white_queen.png");
+                }
+
+            }
         }
     }
 }

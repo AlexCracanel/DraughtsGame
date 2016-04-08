@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -8,7 +9,8 @@ using System.Windows.Media.Imaging;
 
 namespace DraughtsGame.Model.DomainModel
 {
-    class Piece : DependencyObject
+    [Serializable]
+    public class Piece : DependencyObject,ISerializable
     {
 
         public int Row
@@ -71,5 +73,18 @@ namespace DraughtsGame.Model.DomainModel
             this.Column = column;
         }
 
+        public Piece(SerializationInfo info, StreamingContext ctxt)
+        {
+            Row = (int)info.GetValue("row", typeof(int));
+            Column = (int)info.GetValue("column", typeof(int));
+            Type = (GameUtil.PieceType)info.GetValue("type", typeof(GameUtil.PieceType));
+        }
+
+        public void GetObjectData(SerializationInfo info, StreamingContext ctxt)
+        {
+            info.AddValue("row", Row);
+            info.AddValue("column", Column);
+            info.AddValue("type", Type);
+        }
     }
 }

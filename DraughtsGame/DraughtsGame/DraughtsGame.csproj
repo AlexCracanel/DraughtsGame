@@ -58,6 +58,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BinarySerializer\ObjectToSerialize.cs" />
+    <Compile Include="BinarySerializer\Serializer.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Model\DomainModel\Piece.cs" />
     <Compile Include="Model\ServiceLayer\GameActions.cs" />
