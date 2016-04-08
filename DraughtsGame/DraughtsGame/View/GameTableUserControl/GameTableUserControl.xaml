@@ -13,6 +13,7 @@
             Height="auto" 
             Width="auto"
             Background="#FFF3DDB4">
+        
         <ListBox Name="gameTableListBox"
                  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
                  BorderThickness="0"
