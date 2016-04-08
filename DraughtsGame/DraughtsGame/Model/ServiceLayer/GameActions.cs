@@ -437,6 +437,11 @@ namespace DraughtsGame.Model.ServiceLayer
         #region BlackKing
         private bool IsValidKingMove(Piece futurePositon)  
         {
+            if(selectedPiece.Type != GameUtil.PieceType.BLACK_KING && selectedPiece.Type != GameUtil.PieceType.WHITE_KING)
+            {
+                return false;
+            }
+
             if (futurePositon.Column != (selectedPiece.Column + 1) && futurePositon.Column != (selectedPiece.Column - 1))
             {
                 return false;
