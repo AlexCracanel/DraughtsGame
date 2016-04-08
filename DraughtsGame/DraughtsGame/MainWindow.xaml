@@ -11,7 +11,8 @@
         mc:Ignorable="d"
         Title="DraughtsGame" Height="550" Width="825"
         MinHeight="550" MinWidth="825"
-        Icon="Images/GameIcon.png">
+        Icon="Images/GameIcon.png"
+        Name="window">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -31,13 +32,14 @@
                                          Margin="5"
                                          VerticalAlignment="Top"
                                          PlayerName="First player"
-                                         Score="0"                             
+                                         Score="{Binding ElementName=window,Path=DataContext.BlackScore}"                             
                                          />
 
             <scorePanel:ScoreUserControl Height="auto" Width="auto" 
                                          Margin="5"
                                          Grid.Row="2"
                                          PlayerName="Second player"
+                                         Score="{Binding ElementName=window,Path=DataContext.WhiteScore}"
                                          VerticalAlignment="Bottom"/>
 
             <infoMenu:InfoMenuUserControl Height="auto" Width="auto" 

@@ -59,7 +59,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\RelayCommand.cs" />
-    <Compile Include="Model\DomainModel\BasePropertyChange.cs" />
     <Compile Include="Model\DomainModel\Piece.cs" />
     <Compile Include="Model\ServiceLayer\GameActions.cs" />
     <Compile Include="View\GameMenuUserControl\GameMenuUserControl.xaml.cs">

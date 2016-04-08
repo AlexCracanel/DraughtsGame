@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DraughtsGame.View.GameTableUserControl.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace DraughtsGame
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new GameTableViewModel();
         }
     }
 }

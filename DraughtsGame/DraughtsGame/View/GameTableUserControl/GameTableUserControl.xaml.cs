@@ -26,8 +26,7 @@ namespace DraughtsGame.View.GameTableUserControl
 
         public GameTableUserControl()
         {
-            InitializeComponent();
-            DataContext = new GameTableViewModel();
+            InitializeComponent();           
         }
     }
 }
