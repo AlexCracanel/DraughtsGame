@@ -14,6 +14,7 @@ namespace DraughtsGame.Model.ServiceLayer
     class GameActions : DependencyObject
     {
 
+        private bool isGameOver;
 
         public int BlackScore
         {
@@ -23,7 +24,22 @@ namespace DraughtsGame.Model.ServiceLayer
 
         // Using a DependencyProperty as the backing store for BlackScore.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty BlackScoreProperty =
-            DependencyProperty.Register("BlackScore", typeof(int), typeof(GameActions), new PropertyMetadata(0));
+            DependencyProperty.Register("BlackScore", typeof(int), typeof(GameActions), new PropertyMetadata(0,new PropertyChangedCallback(BlackScore_PropertyChangedCallback)));
+
+        static void BlackScore_PropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e) 
+        {
+            GameActions myObject = d as GameActions;
+            Console.WriteLine("InChange");
+
+            if (myObject != null)
+            {
+                if(myObject.BlackScore == 12)
+                {
+                    myObject.InfoMenuText = "Black player win !";
+                    myObject.isGameOver = true;
+                }
+            }
+        }
 
         public int WhiteScore
         {
@@ -33,7 +49,32 @@ namespace DraughtsGame.Model.ServiceLayer
 
         // Using a DependencyProperty as the backing store for WhiteScore.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty WhiteScoreProperty =
-            DependencyProperty.Register("WhiteScore", typeof(int), typeof(GameActions), new PropertyMetadata(0));
+            DependencyProperty.Register("WhiteScore", typeof(int), typeof(GameActions), new PropertyMetadata(0,new PropertyChangedCallback(WhiteScore_PropertyChangedCallback)));
+
+        static void WhiteScore_PropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            GameActions myObject = d as GameActions;
+            Console.WriteLine("InChange");
+
+            if (myObject != null)
+            {
+                if (myObject.WhiteScore == 12)
+                {
+                    myObject.InfoMenuText = "White player win !";
+                    myObject.isGameOver = true;
+                }
+            }
+        }
+
+        public string InfoMenuText
+        {
+            get { return (string)GetValue(InfoTextProperty); }
+            set { SetValue(InfoTextProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for InfoText.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty InfoTextProperty =
+            DependencyProperty.Register("InfoMenuText", typeof(string), typeof(GameActions), new PropertyMetadata(String.Empty));
 
         public ObservableCollection<Piece> Pieces
         {
@@ -53,7 +94,10 @@ namespace DraughtsGame.Model.ServiceLayer
             AddBlackQueen();
             AddWhiteQueen();
 
+            isGameOver = false;
+
             currentPlayer = GameUtil.CurrentPlayer.BLACK_PLAYER;
+            InfoMenuText = "Black player turn !";
         }
 
         private void AddBlackQueen()
@@ -91,6 +135,11 @@ namespace DraughtsGame.Model.ServiceLayer
 
         public void Move(Object parameter)
         {
+            if(isGameOver)
+            {
+                return;
+            }
+
             var piece = parameter as Piece;
 
             if (piece != null && piece.Type != GameUtil.PieceType.EMPTY)
@@ -107,7 +156,7 @@ namespace DraughtsGame.Model.ServiceLayer
 
                             if (currentPlayer == GameUtil.CurrentPlayer.BLACK_PLAYER)
                             {
-                                MoveForBlackQueen(piece);
+                                MoveForBlackQueen(piece);                             
                             }
                             break;
 
@@ -115,7 +164,7 @@ namespace DraughtsGame.Model.ServiceLayer
 
                             if (currentPlayer == GameUtil.CurrentPlayer.WHITE_PLAYER)
                             {
-                                MoveForWhiteQueen(piece);
+                                MoveForWhiteQueen(piece);                               
                             }
 
                             break;
@@ -158,6 +207,7 @@ namespace DraughtsGame.Model.ServiceLayer
                     selectedPiece.Row = futurePositon.Row;
 
                     currentPlayer = GameUtil.CurrentPlayer.WHITE_PLAYER;
+                    InfoMenuText = "White player turn !";
 
                     return;
                 }
@@ -182,9 +232,10 @@ namespace DraughtsGame.Model.ServiceLayer
                     BlackScore++;
                 }
 
-                if (!BlackShoodTake() && !BlackKingShoodTake())
+                if (!BlackShoodTake() && !BlackKingShoodTake() && !isGameOver)
                 {
                     currentPlayer = GameUtil.CurrentPlayer.WHITE_PLAYER;
+                    InfoMenuText = "White player turn !";
                 }
             }
 
@@ -303,6 +354,7 @@ namespace DraughtsGame.Model.ServiceLayer
                     selectedPiece.Row = futurePositon.Row;
 
                     currentPlayer = GameUtil.CurrentPlayer.BLACK_PLAYER;
+                    InfoMenuText = "Black player turn !";
 
                     return;
                 }
@@ -326,9 +378,10 @@ namespace DraughtsGame.Model.ServiceLayer
                     WhiteScore++;
                 }
 
-                if (!WhiteShoodTake() && !WhiteKingShoodTake())
+                if (!WhiteShoodTake() && !WhiteKingShoodTake() && !isGameOver)
                 {
                     currentPlayer = GameUtil.CurrentPlayer.BLACK_PLAYER;
+                    InfoMenuText = "Black player turn !";
                 }
             }
         }

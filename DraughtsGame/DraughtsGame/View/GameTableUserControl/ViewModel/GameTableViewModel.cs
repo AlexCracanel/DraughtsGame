@@ -33,5 +33,18 @@ namespace DraughtsGame.View.GameTableUserControl.ViewModel
                 return moveGameCommand;
             }
         }
+
+        private ICommand restartGameCommand;
+        public ICommand RestartGameCommand 
+        {
+            get
+            {
+                if (restartGameCommand == null)
+                {
+                    //restartGameCommand = new RelayCommand(new Action<object>());
+                }
+                return restartGameCommand;
+            }
+        }
     }
 }

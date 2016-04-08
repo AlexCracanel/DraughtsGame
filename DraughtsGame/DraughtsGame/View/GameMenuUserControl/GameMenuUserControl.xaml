@@ -74,6 +74,8 @@
                 <RowDefinition Height="40"/>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="40"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="40"/>
                 <RowDefinition/>
 
             </Grid.RowDefinitions>
@@ -88,7 +90,7 @@
 
             <TextBlock Height="auto" Width="auto"
                        Margin="10,0"
-                       Text="Start game"
+                       Text="Load game"
                        FontSize="25" FontWeight="Bold"  
                        Foreground="White" FontFamily="Comic Sans MS"
                        HorizontalAlignment="Left"
@@ -102,7 +104,7 @@
                        VerticalAlignment="Bottom"
                        Margin="5"
                        />
-            <Button Content="Start" VerticalAlignment="Top" HorizontalAlignment="Left"
+            <Button Content="Open" VerticalAlignment="Top" HorizontalAlignment="Left"
                     Width="100" Height="30"
                     Foreground="Black" FontSize="15" FontFamily="Comic Sans MS"
                     Background="#FFE89A4C"
@@ -129,6 +131,28 @@
                     Foreground="Black" FontSize="15" FontFamily="Comic Sans MS"
                     Background="#FFE89A4C"
                     Margin="10,5" Grid.Row="4"/>
+
+            <TextBlock Height="auto" Width="auto"
+                       Margin="10,0"
+                       Text="Restart game"
+                       FontSize="25" FontWeight="Bold"  
+                       Foreground="White" FontFamily="Comic Sans MS"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Grid.Row="5"
+                       />
+            <Separator Height="10" Width="200"
+                       Background="White" 
+                       Grid.Row="5"
+                        HorizontalAlignment="Left"
+                       VerticalAlignment="Bottom"
+                       Margin="5"
+                       />
+            <Button Content="Restart" VerticalAlignment="Top" HorizontalAlignment="Left"
+                    Width="100" Height="30"
+                    Foreground="Black" FontSize="15" FontFamily="Comic Sans MS"
+                    Background="#FFE89A4C"
+                    Margin="10,5" Grid.Row="6" Command="{Binding RestartGameCommand}"/>
         </Grid>
 
         <Button Height="50" Width="50"

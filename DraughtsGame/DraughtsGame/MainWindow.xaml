@@ -45,7 +45,7 @@
             <infoMenu:InfoMenuUserControl Height="auto" Width="auto" 
                                          Margin="5"
                                          Grid.Row="1"
-                                         InfoText="Please start game !"
+                                         InfoText="{Binding ElementName=window,Path=DataContext.InfoMenuText}"
                                          VerticalAlignment="Center"/>
 
         </Grid>

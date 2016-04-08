@@ -20,8 +20,7 @@ namespace DraughtsGame.View.InfoMenuUserControl
     /// </summary>
     public partial class InfoMenuUserControl : UserControl
     {
-        public static readonly DependencyProperty InfoTextProperty =
-       DependencyProperty.Register("PlayerName", typeof(string), typeof(InfoMenuUserControl), new FrameworkPropertyMetadata(string.Empty));
+
 
         public string InfoText
         {
@@ -29,10 +28,14 @@ namespace DraughtsGame.View.InfoMenuUserControl
             set { SetValue(InfoTextProperty, value); }
         }
 
+        // Using a DependencyProperty as the backing store for InfoText.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty InfoTextProperty =
+            DependencyProperty.Register("InfoText", typeof(string), typeof(InfoMenuUserControl), new PropertyMetadata(String.Empty));
+
         public InfoMenuUserControl()
         {
             InitializeComponent();
-            _this.DataContext = this;
+            window.DataContext = this;
         }
     }
 }

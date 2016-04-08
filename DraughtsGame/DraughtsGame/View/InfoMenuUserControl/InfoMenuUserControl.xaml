@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DraughtsGame.View.InfoMenuUserControl"
              mc:Ignorable="d" 
-             Name="_this"
+             Name="window"
              >
 
     <Border BorderThickness="6"
